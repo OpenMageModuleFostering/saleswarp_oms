@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Saleswarp_Oms</name>
+    <version>0.1.2</version>
+    <stability>stable</stability>
+    <license uri="https://www.saleswarp.com/license-saas/">Commercial</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Saleswarp Order Management System</summary>
+    <description>This module connects Magento to the Saleswarp Advanced Order Management Software for omnichannel management. See our website for more details.</description>
+    <notes>Production version</notes>
+    <authors><author><name>David Potts</name><user>David</user><email>sales@saleswarp.com</email></author></authors>
+    <date>2016-02-03</date>
+    <time>21:37:43</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="Saleswarp_Oms.xml" hash="d7517f57c7067f8dbe22fd1dcab808f0"/></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="template"><dir name="oms"><dir name="form"><file name="saleswarp.phtml" hash="bbad1f2cd7a051e94ccedd746dea792f"/></dir><dir name="system"><dir name="config"><file name="button.phtml" hash="a56213475969648e407ebcaa7876b543"/></dir></dir></dir></dir></dir></dir></dir></target><target name="magelocal"><dir name="Saleswarp"><dir name="Oms"><dir name="Block"><dir name="Adminhtml"><dir name="System"><dir name="Config"><dir name="Form"><file name="Button.php" hash="98b0800abe8bfc2e134a8c6a3105f456"/><file name="Key.php" hash="9c214ab80440d4f8616e3be453c68648"/></dir></dir></dir></dir><dir name="Form"><file name="Saleswarp.php" hash="b30ec57de4d6b99ddaeada14f9336ffe"/></dir><dir name="Info"><file name="Saleswarp.php" hash="c45c80aa79fcc26a64740ae0fa68de6e"/></dir></dir><dir name="Helper"><file name="Data.php" hash="56d7205458e363668c92f6c854c1148a"/></dir><dir name="Model"><dir name="Category"><file name="Api.php" hash="e95fff09bbb0db173ca2a00bd9aba7af"/></dir><dir name="Config"><file name="Api.php" hash="0c8aadaf4c9a35e00c0c77027e3e9087"/></dir><dir name="Customer"><file name="Api.php" hash="f6964b711ee3ff52e4ad5171923c3fa1"/></dir><dir name="Order"><file name="Api.php" hash="746a7a2625781718cd8bb903b42912b4"/></dir><dir name="Product"><file name="Api.php" hash="94e8ff8435f41fd5a49356c0ee97fee6"/><dir name="Attribute"><file name="Api.php" hash="7c14c8799326c044cfed0106633e3818"/><dir name="Media"><file name="Api.php" hash="2deb5295ebd54133195d21497d23e2a2"/></dir></dir></dir><file name="Saleswarp.php" hash="f571feaf9cb2f9f1cee17da426bc9181"/></dir><dir name="controllers"><dir name="Adminhtml"><file name="GetkeyController.php" hash="5df8d8b4ab7fd86519bb145d2ead3687"/></dir><file name="FastapiController.php" hash="1e1bc36e9043b4a12ba6f74c5b6e1602"/></dir><dir name="etc"><file name="adminhtml.xml" hash="8fe0febceef7c236000fd538d6061a8e"/><file name="config.xml" hash="292f1aacb300ab70cc771ba2d7fd6859"/><file name="system.xml" hash="f09a337b4731e8b569eb5720aff4e8b2"/></dir><dir name="sql"><dir name="oms_setup"><file name="mysql4-install-0.1.1.php" hash="fe7c9448c3e5f0e1ca853c77faa7478f"/><file name="mysql4-upgrade-0.1.2.php" hash="5441c7565508f4f5ad7310635b1edd37"/></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.0.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

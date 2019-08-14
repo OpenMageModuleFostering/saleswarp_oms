@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Saleswarp_Oms",
+    "type": "magento-module",
+    "license": "Commercial",
+    "homepage": "",
+    "description": "Saleswarp Order Management System",
+    "authors": [
+    {
+        "name": "David Potts",
+        "email": "sales@saleswarp.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

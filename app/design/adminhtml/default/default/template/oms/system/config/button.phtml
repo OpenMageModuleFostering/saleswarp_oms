@@ -1,0 +1,36 @@
+<?php if($this->isKeyAvailable()) { ?>
+	<?php $data	= $this->getKeyData(); ?>
+	<a href="<?php echo $data['create_url']; ?>" target="_blank">Create New Account</a>
+	&nbsp;|&nbsp;
+	<a href="<?php echo $data['login_url']; ?>" target="_blank">Login to existing Account</a>
+<?php } else { ?>
+	<script type="text/javascript">
+	//<![CDATA[
+	function getKey() {
+		new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+			method:     'get',
+			onSuccess: function(transport){
+				var data = transport.responseText.evalJSON(true);
+				if (data.success == 1) {
+					$('layer_get_key').innerHTML = "";
+					$('layer_get_key_links').style.display = 'block';
+					$('oms_registration_key').value = data.key;
+					configForm.submit();
+				} else {
+					alert('Error while making the key request, kindly confirm that the api URL and other details under custom variables.');
+				}
+			}
+		});
+	}
+	//]]>
+	</script>
+	<div id="layer_get_key">
+		<?php echo $this->getButtonHtml() ?>
+	</div>
+	<div id="layer_get_key_links" style="display:none;">
+		<?php $data	= $this->getKeyData(); ?>
+		<a href="<?php echo $data['create_url']; ?>" target="_blank">Create New Account</a>
+		&nbsp;|&nbsp;
+		<a href="<?php echo $data['login_url']; ?>" target="_blank">Login to existing Account</a>
+	</div>
+<?php } ?>
