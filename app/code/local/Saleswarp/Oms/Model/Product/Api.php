@@ -70,7 +70,7 @@ class Saleswarp_Oms_Model_Product_Api extends Mage_Catalog_Model_Product_Api
 				$transactionSave = Mage::getModel('core/resource_transaction')->addObject($invoice)->addObject($invoice->getOrder());
 				$transactionSave->save();
 				$this->order = Mage::getSingleton('sales/order_api');
-				$this->order->addComment($order_id, 'processing', 'Captured Offlined successfully', false);
+				$this->order->addComment($orderId, 'processing', 'Captured Offlined successfully', false);
 				return true;
 			}
 		} else {
@@ -145,11 +145,18 @@ class Saleswarp_Oms_Model_Product_Api extends Mage_Catalog_Model_Product_Api
 	function get_product_collection($type, $offset = 1, $limit = 10, $modifiedAfter = null, $createdAfter = null)
 	{
 		$data = array();
-		Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+	/*	Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 		
 		$collection = Mage::getModel('catalog/product')
 			->getCollection()
 			->addAttributeToSelect('*') // select all attributes
+			->addFieldToFilter('type_id', $type);
+*/
+		$storeId = Mage::app()->getStore()->getStoreId();
+
+		$collection = Mage::getResourceModel('catalog/product_collection')
+			->addStoreFilter($storeId)
+			->addAttributeToSelect('*')
 			->addFieldToFilter('type_id', $type);
 
 		if (!empty($modifiedAfter)) {

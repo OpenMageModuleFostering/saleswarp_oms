@@ -1,7 +1,7 @@
 {
     "name": "OpenMageModuleFostering/Saleswarp_Oms",
     "type": "magento-module",
-    "license": "Commercial",
+    "license": "commercial",
     "homepage": "",
     "description": "Saleswarp Order Management System",
     "authors": [

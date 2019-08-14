@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Saleswarp_WhitelistIP>
+            <version>0.1.0</version>
+        </Saleswarp_WhitelistIP>
+    </modules>
+    <frontend>
+        <routers>
+			<oms>
+				<args>
+					<modules>
+						<saleswarp_whitelistip before="Saleswarp_Oms">Saleswarp_WhitelistIP</saleswarp_whitelistip>
+					</modules>
+				</args>
+			</oms>
+        </routers>
+    </frontend>
+</config>

@@ -22,30 +22,28 @@ class Saleswarp_Oms_Model_Order_Api extends Mage_Sales_Model_Order_Api
 	* return a recent order list
 	* if any parameter is set to zero then that will not be considered for order pull.
 	*/
-	
 	public function get_recent_order_list($limit = 0, $lastdays = 5, $offset = 0)
 	{
-		$daysOldQuery = '';
-		
+		$storeId    = Mage::app()->getStore()->getStoreId();
+		$conditions = ' WHERE store_id = ' . $storeId . ' AND ';
+
 		// return a list of orders in the last X days
 		if ($lastdays != 0) {
-			$daysOldQuery = " WHERE created_at > '" . strftime('%Y-%m-%d %H:%M:%S', (time() - (24 * 60 * 60 * $lastdays))) . "'";
+			$conditions .= " created_at > '" . strftime('%Y-%m-%d %H:%M:%S', (time() - (24 * 60 * 60 * $lastdays))) . "'";
 		}
-		
-		$limitQuery = '';
-		
+
 		// set limit for orders
 		if ($limit != 0) {
-			$limitQuery = " LIMIT $offset, $limit";
+			$conditions .= " LIMIT $offset, $limit";
 		}
-		
+
 		$salesFlatTable = Mage::getSingleton('core/resource')->getTableName('sales_flat_order');
-		$sql            = "select * from " . $salesFlatTable . $daysOldQuery . $limitQuery;
-		
+		$sql            = "select * from " . $salesFlatTable . $conditions;
+
 		$orders = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
 		return $orders;
 	}
-	
+
 	/**
 	* get active shipping methods 
 	*/
@@ -82,6 +80,25 @@ class Saleswarp_Oms_Model_Order_Api extends Mage_Sales_Model_Order_Api
 		return $paymentTitle;
 	}
 	
+	/**
+	* function to get lineitem id
+	* @param magento order id
+	* @return lineitems id
+	*/
+	function getLineItem($mageOrderId)
+	{
+		// get the order id
+		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$salesFlatTable = Mage::getSingleton( 'core/resource' )->getTableName( 'sales_flat_order' );
+		$orderItemTable = Mage::getSingleton( 'core/resource' )->getTableName( 'sales_flat_order_item' );
+
+		//check for existig group
+		$chk = $write->query("SELECT l.item_id, l.product_id FROM ". $salesFlatTable ." ord  INNER JOIN
+		". $orderItemTable ." l ON ord.entity_id = l.order_id WHERE ord.increment_id = '".(int)$mageOrderId."'");
+		$row = $chk->fetchAll(PDO::FETCH_ASSOC);
+		return $row;
+	}
+
 	/**
 	* Create order in magento 
 	*/
@@ -255,7 +272,7 @@ class Saleswarp_Oms_Model_Order_Api extends Mage_Sales_Model_Order_Api
 			}
 		}
 		
-		$shipMethod = 'flatrate_flatrate';
+		$shipMethod = !empty($data['Saleswarp']['freightID']) ? $data['Saleswarp']['freightID'] : 'flatrate_flatrate';
 		
 		try {
 			$billingAddress = $quote->getBillingAddress()->addData($billAddressData);
